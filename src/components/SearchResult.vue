@@ -1,0 +1,19 @@
+<template lang="html">
+  <div v-for="youtube in list">
+    {{ youtube.snippet.title }}<br>
+    <img :src="youtube.snippet.thumbnails.medium.url" alt="" @click="select(youtube.id.videoId)"> <br>
+    <hr>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['list', 'select'],
+  data () {
+    return {}
+  }
+}
+</script>
+
+<style lang="css">
+</style>
