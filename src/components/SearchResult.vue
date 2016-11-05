@@ -1,7 +1,7 @@
 <template lang="html">
   <div v-for="youtube in list">
     {{ youtube.snippet.title }}<br>
-    <img :src="youtube.snippet.thumbnails.medium.url" alt="" @click="select(youtube.id.videoId)"> <br>
+    <img :src="youtube.snippet.thumbnails.default.url" alt="" @click="select(youtube.id.videoId)"> <br>
     <hr>
   </div>
 </template>

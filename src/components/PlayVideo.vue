@@ -1,5 +1,5 @@
 <template lang="html">
-  <youtube :video-id="video" @ended="end()" :player-vars="{autoplay: 0}"></youtube>
+  <youtube :video-id="video" @ended="end()" :player-vars="{autoplay: 1}"></youtube>
 </template>
 
 <script>

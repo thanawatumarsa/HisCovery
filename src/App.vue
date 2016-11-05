@@ -1,43 +1,36 @@
 <template lang="html">
   <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
-  <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.2.3/css/bulma.css">
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.2.3/css/bulma.css.map">
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.2.3/css/bulma.min.css">
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.2.3/css/bulma.min.css.map"> -->
-  <div class="container">
-    <header>
-      <tool-bar :search = "search"></tool-bar>
-    </header>
-    <div id="centre">
+  <header>
+    <tool-bar :search = "search"></tool-bar>
+  </header>
+  <div class="columns">
+  <div class="column">
+    <div id="boxmenu">
+      <div id="textmenu">
+        categories
+      </div>
       <div id="menu">
-        <button class="button3">sdfsdf</button>
-        {{ VideoId }}
-      </div>
-      <div id="center">
-        <div id="video">
-          <play-video :video = "VideoId" :end = "end"></play-video>
-        </div>
-      </div>
-      <div id="playlists">
-        <search-result :list = "list" :select = "select"></search-result>
+        <menu :search = "cateSearch"></menu>
       </div>
     </div>
   </div>
-      <!-- <div>
-      <search-result :list = "list" :select = "select"></search-result>
-    </div> -->
-
-
-  <!-- <div v-for="show in list">
-    <youtube :video-id="show.id" @buffering="buffering()" @playing="playing()" @paused="pause()" @ended="end()" :player-vars="{autoplay: 1}"></youtube>
-  </div><hr>
-  <div v-for="show in playLists">
-    <img v-bind:src="show.snippet.thumbnails.medium.url"><br>
-    {{ show.snippet.title }}
-    {{ $index }}
+  <div class="column">
+  </div>
+  <div class="column">
+    <div id="video">
+      <play-video :video = "VideoId" :end = "end"></play-video>
+    </div>
     <hr>
-  </div> -->
+  </div>
+  <div class="column">
+  </div>
+  <div class="column">
+    <div id="playlists">
+      <search-result :list = "list" :select = "select"></search-result>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
@@ -48,6 +41,7 @@ Vue.use(VueYouTubeEmbed)
 import ToolBar from './components/ToolBar'
 import PlayVideo from './components/PlayVideo'
 import SearchResult from './components/SearchResult'
+import Menu from './components/Menu'
 
 export default {
   data () {
@@ -68,19 +62,18 @@ export default {
       ],
       num: 0,
       VideoId: 'Pi8xsZXibIc',
-      defaultPL: 'cover'
+      defaultPL: 'cover',
+      keyTemp: ''
     }
   },
   ready () {
     this.search(this.defaultPL)
-  //  this.$http.get('/search?keyword=' + keyword).then(function (res) {})
-    // this.getApi(this.num)
-    // this.playList()
   },
   components: {
     ToolBar,
     PlayVideo,
-    SearchResult
+    SearchResult,
+    Menu
   },
   methods: {
     end () {
@@ -108,13 +101,20 @@ export default {
     // },
     search (keyword) {
       let vm = this
-      this.$http.get('http://localhost:3000/search?keyword=' + keyword).then(function (res) {
+      this.$http.get('http://localhost:3000/search?keyword=' + keyword + 'cover').then(function (res) {
+        console.log(JSON.parse(res.body))
+        vm.list = JSON.parse(res.body).items
+        this.keyTemp = keyword
+      })
+    },
+    cateSearch (keysearch) {
+      let vm = this
+      this.$http.get('http://localhost:3000/search?keyword=' + this.keyTemp + keysearch).then(function (res) {
         console.log(JSON.parse(res.body))
         vm.list = JSON.parse(res.body).items
       })
     },
     select (id) {
-      // let source = `http://www.youtube.com/embed/${id}?autoplay=1`
       let source = id
       this.VideoId = source
       console.log(this.VideoId)
@@ -126,66 +126,76 @@ export default {
 <style lang="css">
 
 body {
-  padding: 0;
-  margin: 0;
-  background-color: #1C1C1C;
+  height: 100%;
   font-family: 'Dosis', 'Kanit';
-  color: white;
+  background-color: #181818;
 }
+
 
 #center {
-  width: 60%;
-  height: 100%;
+  margin-top: 30px;
+  margin-bottom: 30px;
   display: inline-block;
-  align-items: center;
+  width: 60%;
   text-align: center;
-  background-color: #151515;
-  margin-left: 86px;
-}
-
-div.container {
-    width: 100%;
 }
 
 header {
+  width: 100%;
   padding: 1em;
   color: white;
-  background-color: black;
-  border-bottom: 1px solid black;
-  clear: left;
+  margin-top: -10px;
+  margin-left: -10px;
+  background-color: #282828;
+  overflow: hidden;
   text-align: left;
 }
 
-#menu {
-  float: left;
-  max-width: 50px;
-  margin: 0;
-  margin-right: 100px;
+#main div {
+   flex: 1;
 }
 
-#centre {
-  width: 100%;
+#textmenu {
+  padding: 20px 25px;
+  font-family: 'Dosis', 'Kanit';
+  font-size: 25px;
+  color: white;
+}
+
+#boxmenu {
+  background-color: #212121;
   height: 100%;
-  align-items: center;
+  width: 100%;
+  margin-left: -8px;
+  margin-top: 1px;
+}
+
+#menu {
+  width: 100%;
+  margin-top: 10px;
+  float: left;
+  background-color: #212121;
 }
 
 #video {
   margin-top: 30px;
   margin-bottom: 30px;
+  width: 100%;
 }
 
+
 #playlists {
-  float: right;
-  margin: 0;
-  margin-top: 10px;
-  margin-right: 50px;
-  max-width: 356px;
-  max-height: 850px;
+  height: 92.9vh;
+  margin-top: 1px;
+  margin-right: -8px;
+  margin-bottom: -8px;
   overflow-y:scroll;
   text-align: center;
+  background-color: #212121;
 }
 
 input[type=text]{
+  padding: 6px 12px;
   border-radius:10px;
   height: 20px;
   width: 200px;
@@ -197,10 +207,11 @@ input[type=text]{
 }
 
 .button3 {
+  padding: 0px 30px;
   text-align: left;
-  width: 240px;
+  width: 100%;
   height: 50px;
-  background-color: #1C1C1C;
+  background-color: #212121;
   border: 0;
   font-family: 'Dosis', 'Kanit';
   font-size: 20px;
@@ -210,40 +221,6 @@ input[type=text]{
 
 .button3:hover {
     background-color: #404040;
-}
-
-::-webkit-scrollbar {
-  width: 13px;
-  height: 13px;
-}
-::-webkit-scrollbar-button {
-  width: 0px;
-  height: 0px;
-}
-::-webkit-scrollbar-thumb {
-  background: #454545;
-  border: 0px none #ffffff;
-  border-radius: 50px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #353535;
-}
-::-webkit-scrollbar-thumb:active {
-  background: #292929;
-}
-::-webkit-scrollbar-track {
-  background: #1c1c1c;
-  border: 0px none #ffffff;
-  border-radius: 50px;
-}
-::-webkit-scrollbar-track:hover {
-  background: #1c1c1c;
-}
-::-webkit-scrollbar-track:active {
-  background: #1c1c1c;
-}
-::-webkit-scrollbar-corner {
-  background: transparent;
 }
 
 </style>
