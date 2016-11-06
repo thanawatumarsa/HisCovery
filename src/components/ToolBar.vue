@@ -1,5 +1,5 @@
 <template>
-  <input type="text" v-model="keyword" @keyup.enter='search(keyword)'>
+  <input type="text" v-model="keyword" placeholder="Search" @keyup.enter='search(keyword)'>
 </template>
 
 <script>
