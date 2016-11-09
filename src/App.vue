@@ -6,43 +6,16 @@
       <tool-bar :search = "search"></tool-bar>
     </div>
   </div>
-
-    <div class="columns is-desktop">
+  <div class="columns is-desktop">
     <div class="column is-2 is-offset-1">
-
-      <div id="boxmenu">
-        <div id="textmenu">
-          Categories
-        </div>
-        <div id="menu">
-          <menu :search = "cateSearch"></menu>
-        </div>
-      </div>
+      <menu :search = "cateSearch"></menu>
     </div>
-
     <div class="column is-6 is-offset-0">
-
-      <div class="content">
-        <div class="video-container">
-            <play-video :video = "VideoId" :end = "end"></play-video>
-        </div>
-      </div>
+      <content :toggleshow = "toggleShow" :show = "show" :list = "list" :select = "select" :video = "VideoId" :end = "end"></content>
     </div>
-
     <div class="column is-2 is-offset-0">
-
-      <div id="list">
-        <div id="textmenu">
-          PlayList
-        </div>
-        <div id="playlists">
-          <search-result :list = "list" :select = "select"></search-result>
-        </div>
-      </div>
     </div>
   </div>
-
-
 </template>
 
 <script>
@@ -51,8 +24,7 @@ import VueYouTubeEmbed from 'vue-youtube-embed'
 Vue.use(VueYouTubeEmbed)
 
 import ToolBar from './components/ToolBar'
-import PlayVideo from './components/PlayVideo'
-import SearchResult from './components/SearchResult'
+import Content from './components/Content'
 import Menu from './components/Menu'
 
 export default {
@@ -61,9 +33,10 @@ export default {
       list: [],
       playLists: [],
       num: 0,
-      VideoId: 'WNKyppxHCdw',
+      VideoId: '',
       defaultPL: 'cover',
-      keyTemp: ''
+      keyTemp: '',
+      show: true
     }
   },
   ready () {
@@ -71,33 +44,35 @@ export default {
   },
   components: {
     ToolBar,
-    PlayVideo,
-    SearchResult,
+    Content,
     Menu
   },
   methods: {
+    toggleShow () {
+      this.show = !this.show
+    },
     end () {
       console.log('end')
     },
     search (keyword) {
       let vm = this
       this.$http.get('http://localhost:3000/search?keyword=' + keyword + 'cover').then(function (res) {
-        console.log(JSON.parse(res.body))
+        // console.log(JSON.parse(res.body))
         vm.list = JSON.parse(res.body).items
         this.keyTemp = keyword
+        this.show = true
       })
     },
     cateSearch (keysearch) {
       let vm = this
       this.$http.get('http://localhost:3000/search?keyword=' + this.keyTemp + keysearch).then(function (res) {
-        console.log(JSON.parse(res.body))
         vm.list = JSON.parse(res.body).items
+        this.show = true
       })
     },
     select (id) {
       let source = id
       this.VideoId = source
-      console.log(this.VideoId)
     }
   }
 }
@@ -163,7 +138,7 @@ body {
 .content {
   background-color: #212121;
   margin-top: 10px;
-  text-align: center;
+  align-items: center;
   overflow: hidden;
   border-radius: 3px;
 }
@@ -173,6 +148,7 @@ body {
   background-color: #212121;
   height: 100%;
   width: 100%;
+  align-items: center;
   border-radius: 3px;
 }
 
@@ -181,7 +157,7 @@ body {
   height: 80vh;
   width: 100%;
   overflow-y:scroll;
-  text-align: center;
+  align-items: center;
   padding-right:0px;
   background-color: #212121;
 }
@@ -229,6 +205,79 @@ input[type=text]{
 	left:5%;
 	width:90%;
 	height:100%;
+}
+
+.card {
+  width: 90%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 5%;
+  background-color: #666666;
+  overflow: hidden;
+  border-radius: 4px;
+  transition: all 0.2s ease 0s;
+
+}
+
+.card:hover {
+  background-color: #999999;
+  box-shadow: 15px 10px 25px 0 rgba(0,0,0,0.2);
+}
+
+
+.imgLink {
+  float: left;
+  padding-bottom: -6px;
+  width: 30%;
+  margin-top: 15px;
+  margin-left: 15px;
+  margin-right: 5px;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.nameLink {
+  float: right;
+  width: 60%;
+  font-size: 100%;
+  margin-top: 15px;
+  margin-right: 5px;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #000000;
+}
+::-webkit-scrollbar-track {
+  background: #666666;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+::-webkit-scrollbar-track:active {
+  background: #333333;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 
