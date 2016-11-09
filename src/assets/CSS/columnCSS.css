@@ -8,8 +8,8 @@
   -ms-flex-negative: 1;
       flex-shrink: 1;
   padding-bottom: 16px;
-  margin-top: 10px;
-  margin-right: -10px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .columns.is-mobile > .column.is-narrow {
@@ -881,8 +881,6 @@
 }
 
 .columns {
-  margin-left: -10px;
-  margin-top: -10px;
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -954,6 +952,14 @@
 }
 
 @media screen and (min-width: 769px) {
+  .columns:not(.is-desktop) {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media screen and (min-width: 800px) {
   .columns:not(.is-desktop) {
     display: -webkit-box;
     display: -ms-flexbox;

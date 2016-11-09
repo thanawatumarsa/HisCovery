@@ -6,8 +6,10 @@
       <tool-bar :search = "search"></tool-bar>
     </div>
   </div>
+
     <div class="columns is-desktop">
-    <div class="column is-2 is-offset-0">
+    <div class="column is-2 is-offset-1">
+
       <div id="boxmenu">
         <div id="textmenu">
           Categories
@@ -18,22 +20,28 @@
       </div>
     </div>
 
-    <div class="column is-half">
+    <div class="column is-6 is-offset-0">
+
       <div class="content">
-        <div id="video">
-          <play-video :video = "VideoId" :end = "end"></play-video>
+        <div class="video-container">
+            <play-video :video = "VideoId" :end = "end"></play-video>
         </div>
       </div>
     </div>
 
-    <div class="column">
+    <div class="column is-2 is-offset-0">
+
       <div id="list">
+        <div id="textmenu">
+          PlayList
+        </div>
         <div id="playlists">
           <search-result :list = "list" :select = "select"></search-result>
         </div>
       </div>
     </div>
   </div>
+
 
 </template>
 
@@ -53,7 +61,7 @@ export default {
       list: [],
       playLists: [],
       num: 0,
-      VideoId: 'Pi8xsZXibIc',
+      VideoId: 'WNKyppxHCdw',
       defaultPL: 'cover',
       keyTemp: ''
     }
@@ -106,13 +114,6 @@ body {
   background-color: #181818;
 }
 
-#center {
-  margin-top: 30px;
-  margin-bottom: 30px;
-  display: inline-block;
-  width: 60%;
-  text-align: center;
-}
 
 .top {
   padding: 0;
@@ -125,7 +126,7 @@ body {
 }
 
 #header {
-  padding: 12px 20px;
+  padding: 12px 10%;
 }
 
 #main div {
@@ -141,11 +142,10 @@ body {
 
 #boxmenu {
   background-color: #212121;
-  height: 100%;
   width: 100%;
-  margin-left: -8px;
-  margin-top: 1px;
-  padding-bottom: 15px;
+  margin-top: 10px;
+  padding-bottom: 20px;
+  border-radius: 3px;
 }
 
 #menu {
@@ -157,29 +157,29 @@ body {
 #video {
   margin-bottom: 30px;
   width: 100%;
-}
-
-.content {
-  margin-top: 30px;
-  margin-left: -27px;
-  margin-right: -29px;
   text-align: center;
 }
 
+.content {
+  background-color: #212121;
+  margin-top: 10px;
+  text-align: center;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
 #list {
-  padding-right: 8px;
+  margin-top: 10px;
   background-color: #212121;
   height: 100%;
   width: 100%;
-  margin-left: -8px;
-  margin-top: 1px;
-  padding-bottom: 15px;
+  border-radius: 3px;
 }
 
 #playlists {
-  height: 93vh;
+  margin-top: 10px;
+  height: 80vh;
   width: 100%;
-  margin-top: 1px;
   overflow-y:scroll;
   text-align: center;
   padding-right:0px;
@@ -216,24 +216,20 @@ input[type=text]{
 }
 
 .video-container {
-	position:relative;
-	padding-bottom:56.25%;
-	padding-top:30px;
-	height:0;
-	overflow:hidden;
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  margin-top: 43px;
+  margin-bottom: 43px;
 }
 
-.video-container youtube, .video-container object, .video-container embed {
+.video-container iframe {
 	position:absolute;
 	top:0;
-	left:0;
-	width:100%;
+	left:5%;
+	width:90%;
 	height:100%;
 }
 
-youtube {
-  width: 100%    !important;
-  height: auto   !important;
-}
 
 </style>
