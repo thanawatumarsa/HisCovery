@@ -22,7 +22,6 @@
 import Vue from 'vue'
 import VueYouTubeEmbed from 'vue-youtube-embed'
 Vue.use(VueYouTubeEmbed)
-
 import ToolBar from './components/ToolBar'
 import Content from './components/Content'
 import Menu from './components/Menu'
@@ -31,9 +30,6 @@ export default {
   data () {
     return {
       list: [],
-      playLists: [],
-      num: 0,
-      VideoId: '',
       defaultPL: 'cover',
       keyTemp: '',
       show: true
@@ -88,7 +84,6 @@ body {
   font-family: 'Dosis', 'Kanit';
   background-color: #181818;
 }
-
 
 .top {
   padding: 0;
@@ -279,6 +274,5 @@ input[type=text]{
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
-
 
 </style>
