@@ -1,11 +1,8 @@
 <template lang="html">
   <div id="list">
-    <div id="textmenu">
-      PlayList
-    </div>
     <div id="playlists">
       <div v-for="youtube in list">
-        <list-video :list = "list" :select = "select" :toggleshow = "toggleshow" :index ="$index"></list-video>
+        <list-video :list = "list" :select = "select" :toggleshow = "toggleshow" :index ="$index" :pl = "pl"></list-video>
       </div>
     </div>
   </div>
@@ -15,7 +12,7 @@
 import ListVideo from '../components/ListVideo'
 
 export default {
-  props: ['list', 'select', 'toggleshow'],
+  props: ['list', 'select', 'toggleshow', 'pl'],
   data () {
     return {}
   },

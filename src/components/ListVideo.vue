@@ -1,10 +1,13 @@
 <template lang="html">
-  <div class="card" @click="select(list[index].id.videoId), toggleshow()">
-      <div class="imgLink" >
-        <img v-bind:src="list[index].snippet.thumbnails.medium.url" style="width : 100%;" >
+  <div class="card" >
+      <div @click="select(list[index].id.videoId), toggleshow()">
+        <img class="imgLink" v-bind:src="list[index].snippet.thumbnails.medium.url" >
       </div>
-      <div class="nameLink" style="overflow: hidden;">
+      <div class="nameLink">
         {{ list[index].snippet.title }}<br>
+    </div>
+    <div class="addPlaylist">
+        <button type="button" class="addButt" name="button" @click="pl(list[index])">+ เพิ่มลง Playlist</button>
     </div>
   </div>
 
@@ -12,7 +15,7 @@
 
 <script>
 export default {
-  props: ['list', 'select', 'toggleshow', 'index'],
+  props: ['list', 'select', 'toggleshow', 'index', 'pl'],
   data () {
     return {}
   }

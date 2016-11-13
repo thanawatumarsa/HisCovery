@@ -1,5 +1,5 @@
 <template lang="html">
-  <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
   <div class="top">
     <div id="header">
@@ -8,12 +8,13 @@
   </div>
   <div class="columns is-desktop">
     <div class="column is-2 is-offset-1">
-      <menu :search = "cateSearch"></menu>
+      <menu :cate-search = "cateSearch"></menu>
     </div>
     <div class="column is-6 is-offset-0">
-      <content :toggleshow = "toggleShow" :show = "show" :list = "list" :select = "select" :video = "VideoId" :end = "end"></content>
+      <content :toggleshow = "toggleShow" :show = "show" :list = "list" :select = "select" :video = "VideoId" :end = "end" :pl = "addPlayList"></content>
     </div>
     <div class="column is-2 is-offset-0">
+      <play-list :playlist = "playLists" :deleteplaylist = "deletePlayList"></play-list>
     </div>
   </div>
 </template>
@@ -25,11 +26,14 @@ Vue.use(VueYouTubeEmbed)
 import ToolBar from './components/ToolBar'
 import Content from './components/Content'
 import Menu from './components/Menu'
+import PlayList from './components/PlayList'
 
 export default {
   data () {
     return {
       list: [],
+      playLists: [],
+      VideoId: '',
       defaultPL: 'cover',
       keyTemp: '',
       show: true
@@ -41,7 +45,8 @@ export default {
   components: {
     ToolBar,
     Content,
-    Menu
+    Menu,
+    PlayList
   },
   methods: {
     toggleShow () {
@@ -52,7 +57,7 @@ export default {
     },
     search (keyword) {
       let vm = this
-      this.$http.get('http://localhost:3000/search?keyword=' + keyword + 'cover').then(function (res) {
+      this.$http.get('http://localhost:3000/search?keyword=' + keyword + ' cover').then(function (res) {
         // console.log(JSON.parse(res.body))
         vm.list = JSON.parse(res.body).items
         this.keyTemp = keyword
@@ -69,6 +74,16 @@ export default {
     select (id) {
       let source = id
       this.VideoId = source
+    },
+    addPlayList (pl) {
+      let vm = this
+      vm.playLists.push(pl)
+      console.log(vm.playLists)
+    },
+    deletePlayList (index) {
+      console.log(index)
+      let vm = this
+      vm.playLists.splice(index, 1)
     }
   }
 }
@@ -81,7 +96,7 @@ body {
   margin: 0px;
   height: 100%;
   width: 100%;
-  font-family: 'Dosis', 'Kanit';
+  font-family: 'Catamaran', 'Kanit';
   background-color: #181818;
 }
 
@@ -105,7 +120,7 @@ body {
 
 #textmenu {
   padding: 20px 35px;
-  font-family: 'Dosis', 'Kanit';
+  font-family: 'Catamaran', 'Kanit';
   font-size: 25px;
   color: white;
 }
@@ -130,6 +145,16 @@ body {
   text-align: center;
 }
 
+.playList {
+  width: 100%;
+  height: 60vh;
+  margin-top: 10px;
+  overflow-y:scroll;
+  align-items: center;
+  padding-right:0px;
+  background-color: #212121;
+}
+
 .content {
   background-color: #212121;
   margin-top: 10px;
@@ -141,7 +166,7 @@ body {
 #list {
   margin-top: 10px;
   background-color: #212121;
-  height: 100%;
+  height: 85vh;
   width: 100%;
   align-items: center;
   border-radius: 3px;
@@ -149,7 +174,7 @@ body {
 
 #playlists {
   margin-top: 10px;
-  height: 80vh;
+  height: 83.5vh;
   width: 100%;
   overflow-y:scroll;
   align-items: center;
@@ -162,7 +187,7 @@ input[type=text]{
   border-radius:10px;
   height: 10px;
   width: 200px;
-  font-family: 'Dosis', 'Kanit';
+  font-family: 'Catamaran', 'Kanit';
 }
 
 .searchInput {
@@ -176,7 +201,7 @@ input[type=text]{
   height: 50px;
   background-color: #212121;
   border: 0;
-  font-family: 'Dosis', 'Kanit';
+  font-family: 'Catamaran', 'Kanit';
   font-size: 20px;
   color: white;
   transition: all 0.2s ease 0s;
@@ -211,34 +236,118 @@ input[type=text]{
   overflow: hidden;
   border-radius: 4px;
   transition: all 0.2s ease 0s;
-
 }
 
-.card:hover {
+/*.card:hover {
   background-color: #999999;
   box-shadow: 15px 10px 25px 0 rgba(0,0,0,0.2);
+}*/
+
+.cardPlaylist {
+  width: 90%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 5%;
+  background-color: #666666;
+  overflow: hidden;
+  border-radius: 4px;
+  transition: all 0.2s ease 0s;
 }
 
+/*.cardPlaylist:hover {
+  background-color: #999999;
+  box-shadow: 15px 10px 25px 0 rgba(0,0,0,0.2);
+}*/
 
 .imgLink {
   float: left;
   padding-bottom: -6px;
   width: 30%;
+  height: 13.4vh auto;
   margin-top: 15px;
   margin-left: 15px;
   margin-right: 5px;
   margin-bottom: 15px;
-  overflow: hidden;
+}
+
+.imgPL {
+  float: left;
+  padding-bottom: -6px;
+  width: 40%;
+  height: 13.4vh auto;
+  margin-top: 15px;
+  margin-left: 15px;
+  margin-right: 5px;
+  margin-bottom: 15px;
 }
 
 .nameLink {
-  float: right;
   width: 60%;
+  max-height: 30px;
   font-size: 100%;
   margin-top: 15px;
   margin-right: 5px;
   margin-bottom: 15px;
+  float: right;
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: '...?';
+}
+
+.namePL {
+  width: 50%;
+  height: 50px;
+  font-size: 90%;
+  margin-top: 15px;
+  margin-right: 5px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  text-overflow: '...?';
+}
+
+.del {
+  margin-top: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  border-radius: 3px;
+  width: 20px;
+  height: 20px;
+  border: 0;
+  box-shadow: 2px 2px 5px;
+  text-align: center;
+  float: right;
+  transition: all 0.2s ease 0s;
+}
+
+.del:hover {
+  background-color: #ff4d4d;
+}
+
+.addPlaylist {
+  width: 60%;
+  height: 50px;
+  margin-right: 5px;
+  margin-top: 3%;
+  margin-bottom: 5px;
+  float: right;
+
+}
+
+.addButt {
+  font-family: 'Catamaran', 'Kanit';
+  width: 150px;
+  height: 30px;
+  border-radius: 3px;
+  margin-right: 50px;
+  background-color: #0086b3;
+  float: right;
+  border: 0;
+  transition: all 0.2s ease 0s;
+  box-shadow: 2px 2px 5px;
+}
+
+.addButt:hover {
+    background-color: #00ace6;
 }
 
 ::-webkit-scrollbar {

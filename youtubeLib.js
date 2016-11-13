@@ -3,7 +3,7 @@ var youTube = new Youtube()
 
 exports.search = function (req, res, next) {
   var keyword = req.query.keyword
-  youTube.setKey('AIzaSyCv5kAeAHgj-9uBTBoUv0-92IH_fhmbPTg')
+  youTube.setKey('AIzaSyCCxnHYmglAHJg_5hsL7fxoosaUPGed4LY')
 
   youTube.search(keyword, 20, function (err, result) {
     if (err) {
