@@ -11,10 +11,10 @@
       <menu :cate-search = "cateSearch"></menu>
     </div>
     <div class="column is-6 is-offset-0">
-      <content :toggleshow = "toggleShow" :show = "show" :list = "list" :select = "select" :video = "VideoId" :end = "end" :pl = "addPlayList"></content>
+      <content :toggleshow = "toggleShow" :show = "show" :showplay = "showPlay" :list = "list" :select = "select" :video = "VideoId" :end = "end" :pl = "addPlayList" :showplaylist = "showPlaylist" :showpl = "showpl" :end = "end"></content>
     </div>
     <div class="column is-2 is-offset-0">
-      <play-list :playlist = "playLists" :deleteplaylist = "deletePlayList"></play-list>
+      <play-list :toggleshowplay = "toggleShowPlay" :selectplaylist = "selectPlaylist" :toggleshow = "toggleShow" :playlist = "playLists" :deleteplaylist = "deletePlayList"></play-list>
     </div>
   </div>
 </template>
@@ -31,12 +31,15 @@ import PlayList from './components/PlayList'
 export default {
   data () {
     return {
+      next: 0,
       list: [],
       playLists: [],
       VideoId: '',
       defaultPL: 'cover',
       keyTemp: '',
-      show: true
+      show: true,
+      showPlay: true,
+      showPlaylist: []
     }
   },
   ready () {
@@ -52,8 +55,18 @@ export default {
     toggleShow () {
       this.show = !this.show
     },
+    toggleShowPlay () {
+      this.showPlay = false
+      this.next = 0
+    },
+    nextPlaylist (index) {
+      var vm = this
+      this.VideoId = vm.playLists[index].id.videoId
+    },
     end () {
       console.log('end')
+      this.next++
+      this.nextPlaylist(this.next)
     },
     search (keyword) {
       let vm = this
@@ -62,7 +75,17 @@ export default {
         vm.list = JSON.parse(res.body).items
         this.keyTemp = keyword
         this.show = true
+        for (var i = 0; i < vm.list.length; i++) {
+          var playlistCheck = {
+            id: i,
+            show: false
+          }
+          this.showPlaylist.push(playlistCheck)
+          var test = {test: 'hello'}
+          this.showPlaylist[i].push(test)
+        }
       })
+      console.log(this.showPlaylist)
     },
     cateSearch (keysearch) {
       let vm = this
@@ -75,18 +98,25 @@ export default {
       let source = id
       this.VideoId = source
     },
+    selectPlaylist (id) {
+      let source = id
+      this.VideoId = source
+    },
     addPlayList (pl) {
       let vm = this
       vm.playLists.push(pl)
-      console.log(vm.playLists)
+      // console.log(vm.playLists)
     },
     deletePlayList (index) {
-      console.log(index)
       let vm = this
       vm.playLists.splice(index, 1)
+    },
+    showpl (index) {
+      this.showPlaylist[index].show = true
     }
   }
 }
+
 </script>
 
 <style lang="css">
@@ -238,6 +268,11 @@ input[type=text]{
   transition: all 0.2s ease 0s;
 }
 
+.play {
+  width: 100%;
+  text-align: center;
+}
+
 /*.card:hover {
   background-color: #999999;
   box-shadow: 15px 10px 25px 0 rgba(0,0,0,0.2);
@@ -330,7 +365,24 @@ input[type=text]{
   margin-top: 3%;
   margin-bottom: 5px;
   float: right;
+}
 
+.playButt {
+  font-family: 'Catamaran', 'Kanit';
+  font-size: 20px;
+  width: 90%;
+  height: 30px;
+  border-radius: 3px;
+  background-color: #0086b3;
+  border: 0;
+  transition: all 0.2s ease 0s;
+  box-shadow: 2px 2px 5px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.playButt:hover {
+    background-color: #00ace6;
 }
 
 .addButt {

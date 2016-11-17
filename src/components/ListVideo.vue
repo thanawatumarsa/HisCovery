@@ -7,7 +7,7 @@
         {{ list[index].snippet.title }}<br>
     </div>
     <div class="addPlaylist">
-        <button type="button" class="addButt" name="button" @click="pl(list[index])">+ เพิ่มลง Playlist</button>
+      <button class="addButt" name="button" @click="pl(list[index])">+ เพิ่มลง Playlist</button>
     </div>
   </div>
 
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  props: ['list', 'select', 'toggleshow', 'index', 'pl'],
+  props: ['list', 'select', 'toggleshow', 'index', 'pl', 'showplaylist', 'showpl'],
   data () {
     return {}
   }
