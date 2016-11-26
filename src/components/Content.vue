@@ -1,8 +1,5 @@
 <template lang="html">
   <div class="content">
-    <div class="video-container"  v-if="!show && showplay">
-      <youtube :video-id="video" player-width="560" align="center" :player-vars="{autoplay: 1}"></youtube>
-    </div>
     <div class="video-container"  v-if="!showplay">
       <youtube :video-id="video" player-width="560" align="center" @ended="end()" :player-vars="{autoplay: 1}"></youtube>
     </div>
@@ -14,7 +11,7 @@
 import SearchResult from '../components/SearchResult'
 
 export default {
-  props: ['video', 'end', 'list', 'select', 'show', 'toggleshow', 'pl', 'showplaylist', 'showpl', 'showplay'],
+  props: ['video', 'end', 'list', 'select', 'show', 'pl', 'showplaylist', 'showpl', 'showplay'],
   data () {
     return {
     }

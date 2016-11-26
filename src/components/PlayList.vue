@@ -1,10 +1,12 @@
 <template lang="html">
   <div class="playList">
   <div id="textmenu">
-    PlayList
+    Your Playlist
   </div>
-  <div class="play" v-if="playlist !== null">
-    <button type="button" class="playButt" name="button" @click="selectplaylist(playlist[0].id.videoId), toggleshowplay()">PLAY</button>
+  <div class="play" v-if="playlist.length === 0">
+    <div class="text">
+      Your playist is empty
+    </div>
   </div>
   <div v-for="play in playlist">
     <lists-play-list :playlist = "playlist" :deleteplaylist = 'deleteplaylist' :index ="$index" :showpl = "showpl" :showplaylist = "showplaylist"></lists-play-list>
@@ -16,7 +18,7 @@
 import ListsPlayList from '../components/ListsPlayList'
 
 export default {
-  props: ['playlist', 'deleteplaylist', 'toggleshow', 'selectplaylist', 'toggleshowplay'],
+  props: ['playlist', 'deleteplaylist', 'select'],
   data () {
     return {}
   },

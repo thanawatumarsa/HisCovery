@@ -14,7 +14,7 @@
       <content :toggleshow = "toggleShow" :show = "show" :showplay = "showPlay" :list = "list" :select = "select" :video = "VideoId" :end = "end" :pl = "addPlayList" :showplaylist = "showPlaylist" :showpl = "showpl" :end = "end"></content>
     </div>
     <div class="column is-2 is-offset-0">
-      <play-list :toggleshowplay = "toggleShowPlay" :selectplaylist = "selectPlaylist" :toggleshow = "toggleShow" :playlist = "playLists" :deleteplaylist = "deletePlayList"></play-list>
+      <play-list :toggleshowplay = "toggleShowPlay" :select = "select" :toggleshow = "toggleShow" :playlist = "playLists" :deleteplaylist = "deletePlayList"></play-list>
     </div>
   </div>
 </template>
@@ -31,13 +31,11 @@ import PlayList from './components/PlayList'
 export default {
   data () {
     return {
-      next: 0,
       list: [],
       playLists: [],
       VideoId: '',
       defaultPL: 'cover',
       keyTemp: '',
-      show: true,
       showPlay: true,
       showPlaylist: []
     }
@@ -52,21 +50,10 @@ export default {
     PlayList
   },
   methods: {
-    toggleShow () {
-      this.show = !this.show
-    },
-    toggleShowPlay () {
-      this.showPlay = false
-      this.next = 0
-    },
-    nextPlaylist (index) {
-      var vm = this
-      this.VideoId = vm.playLists[index].id.videoId
-    },
     end () {
-      console.log('end')
-      this.next++
-      this.nextPlaylist(this.next)
+      let vm = this
+      this.deletePlayList(0)
+      this.select(vm.playLists[0])
     },
     search (keyword) {
       let vm = this
@@ -81,11 +68,8 @@ export default {
             show: false
           }
           this.showPlaylist.push(playlistCheck)
-          var test = {test: 'hello'}
-          this.showPlaylist[i].push(test)
         }
       })
-      console.log(this.showPlaylist)
     },
     cateSearch (keysearch) {
       let vm = this
@@ -94,18 +78,38 @@ export default {
         this.show = true
       })
     },
-    select (id) {
-      let source = id
+    select (Vid) {
+      let vm = this
+      let source = Vid.id.videoId
       this.VideoId = source
+      for (var i = 0; i < vm.playLists.length; i++) {
+        if (vm.playLists[i].id.videoId === source) {
+          this.deletePlayList(i)
+        }
+      }
+      vm.playLists.splice(0, 0, Vid)
+      this.showPlay = false
     },
     selectPlaylist (id) {
       let source = id
       this.VideoId = source
     },
     addPlayList (pl) {
+      var check = 0
       let vm = this
-      vm.playLists.push(pl)
-      // console.log(vm.playLists)
+      for (var i = 0; i < vm.playLists.length; i++) {
+        if (vm.playLists[i].id.videoId === pl.id.videoId) {
+          check++
+        }
+      }
+      if (check === 0) {
+        vm.playLists.push(pl)
+      } else {
+        // Do Nothing
+      }
+      if (vm.playLists.length === 1) {
+        this.select(vm.playLists[0])
+      }
     },
     deletePlayList (index) {
       let vm = this
@@ -183,6 +187,7 @@ body {
   align-items: center;
   padding-right:0px;
   background-color: #212121;
+  border-radius: 3px;
 }
 
 .content {
@@ -400,6 +405,13 @@ input[type=text]{
 
 .addButt:hover {
     background-color: #00ace6;
+}
+
+.text {
+  padding: 20px 35px;
+  font-family: 'Catamaran', 'Kanit';
+  font-size: 18px;
+  color: white;
 }
 
 ::-webkit-scrollbar {
