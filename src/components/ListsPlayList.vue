@@ -11,7 +11,7 @@
     {{ playlist[index].snippet.title }}<br>
   </div>
   </div>
-  <div class="cardPlaylist fade-in one color2" v-else>
+  <div class="cardPlaylist fade-in one color" v-else>
     {{ playlist[index].index}}
     <div class="imgPL">
       <div @click="select(playlist[index])">

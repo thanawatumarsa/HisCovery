@@ -367,8 +367,11 @@ input[type=text]{
   margin-right: 5px;
   margin-bottom: 5px;
   border: 0;
+  z-index: -1;
   text-align: center;
   float: right;
+  position: relative;
+
   transition: all 0.2s ease 0s;
 }
 
@@ -379,9 +382,7 @@ input[type=text]{
 .addPlaylist {
   width: 60%;
   height: 50px;
-  margin-right: 5px;
-  margin-top: 3%;
-  margin-bottom: 5px;
+
   float: right;
 }
 
