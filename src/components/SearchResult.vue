@@ -1,11 +1,10 @@
 <template lang="html">
-  <div id="list">
-    <div id="playlists">
+  <div id="playlists">
       <div v-for="youtube in list">
         <list-video :list = "list" :select = "select" :toggleshow = "toggleshow" :index ="$index" :pl = "pl" :showplaylist = "showplaylist" :showpl = "showpl"></list-video>
       </div>
     </div>
-  </div>
+
 </template>
 
 <script>

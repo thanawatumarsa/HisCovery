@@ -2,11 +2,11 @@
     <div id="boxmenu">
   <div id="textmenu">
     Categories
-  </div>
+  </div><hr>
   <div id="menu">
-    <button class="button3" @click="cateSearch(' cover')">Cover</button>
-    <button class="button3" @click="cateSearch(' guitar')">Guitar</button>
-    <button class="button3" @click="cateSearch(' drum')">Drum</button>
+    <button class="button" @click="cateSearch(' cover')">Cover</button>
+    <button class="button" @click="cateSearch(' guitar')">Guitar</button>
+    <button class="button" @click="cateSearch(' drum')">Drum</button>
   </div>
 </div>
 </template>

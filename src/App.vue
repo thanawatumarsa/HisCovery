@@ -1,6 +1,7 @@
 <template lang="html">
   <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Athiti|Oxygen" rel="stylesheet">
   <div class="top">
     <div id="header">
       <tool-bar :search = "search"></tool-bar>
@@ -130,8 +131,8 @@ body {
   margin: 0px;
   height: 100%;
   width: 100%;
-  font-family: 'Catamaran', 'Kanit';
-  background-color: #181818;
+  font-family: 'Athiti', 'Oxygen';
+  background-color: #F1F1F1;
 }
 
 .top {
@@ -154,23 +155,26 @@ body {
 
 #textmenu {
   padding: 20px 35px;
-  font-family: 'Catamaran', 'Kanit';
   font-size: 25px;
-  color: white;
 }
 
 #boxmenu {
-  background-color: #212121;
   width: 100%;
+  height: 100%;
   margin-top: 10px;
   padding-bottom: 20px;
   border-radius: 3px;
 }
 
+/*@media screen and (max-width: 980px) {
+    #boxmenu {
+        visibility: hidden;
+    }
+}*/
+
 #menu {
   width: 100%;
   margin-top: 10px;
-  background-color: #212121;
 }
 
 #video {
@@ -181,29 +185,20 @@ body {
 
 .playList {
   width: 100%;
-  height: 60vh;
+  height: 100%;
   margin-top: 10px;
   overflow-y:scroll;
   align-items: center;
   padding-right:0px;
-  background-color: #212121;
+  background-color: #F2F2F2;
   border-radius: 3px;
 }
 
 .content {
-  background-color: #212121;
+  background-color: #F2F2F2;
   margin-top: 10px;
   align-items: center;
   overflow: hidden;
-  border-radius: 3px;
-}
-
-#list {
-  margin-top: 10px;
-  background-color: #212121;
-  height: 85vh;
-  width: 100%;
-  align-items: center;
   border-radius: 3px;
 }
 
@@ -214,7 +209,6 @@ body {
   overflow-y:scroll;
   align-items: center;
   padding-right:0px;
-  background-color: #212121;
 }
 
 input[type=text]{
@@ -222,27 +216,26 @@ input[type=text]{
   border-radius:10px;
   height: 10px;
   width: 200px;
-  font-family: 'Catamaran', 'Kanit';
 }
 
 .searchInput {
   border-radius: 25px;
 }
 
-.button3 {
+.button {
+  background-color: #F2F2F2;
   padding: 0px 30px;
+  margin-bottom: 2px;
   text-align: left;
   width: 100%;
   height: 50px;
-  background-color: #212121;
   border: 0;
-  font-family: 'Catamaran', 'Kanit';
   font-size: 20px;
-  color: white;
   transition: all 0.2s ease 0s;
+  font-family: 'Athiti', 'Oxygen';
 }
 
-.button3:hover {
+.button:hover {
     background-color: #404040;
 }
 
@@ -250,27 +243,60 @@ input[type=text]{
   position: relative;
   padding-bottom: 56.25%;
   padding-top: 25px;
-  margin-top: 43px;
   margin-bottom: 43px;
 }
 
 .video-container iframe {
 	position:absolute;
+  margin-left: -5%;
 	top:0;
 	left:5%;
-	width:90%;
+	width:100%;
 	height:100%;
 }
 
 .card {
-  width: 90%;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  margin-left: 5%;
-  background-color: #666666;
+  width: 99.5%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: #ffffff;
   overflow: hidden;
-  border-radius: 4px;
   transition: all 0.2s ease 0s;
+  border: 1.2px solid #E6E6E6;
+}
+
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+.cardPlaylist {
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: #ffffff;
+  overflow: hidden;
+  border: 1.2px solid #E6E6E6;
+}
+
+.fade-in {
+  opacity:0;  /* make things invisible upon start */
+	-webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+	-moz-animation:fadeIn ease-in 1;
+	animation:fadeIn ease-in 1;
+
+	-webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+	-moz-animation-fill-mode:forwards;
+	animation-fill-mode:forwards;
+
+	-webkit-animation-duration:0.3s;
+	-moz-animation-duration:0.3s;
+	animation-duration:0.3s;
+}
+
+.fade-in.one {
+  -webkit-animation-delay: 0.1s;
+  -moz-animation-delay: 0.1s;
+  animation-delay: 0.1s;
 }
 
 .play {
@@ -279,22 +305,6 @@ input[type=text]{
 }
 
 /*.card:hover {
-  background-color: #999999;
-  box-shadow: 15px 10px 25px 0 rgba(0,0,0,0.2);
-}*/
-
-.cardPlaylist {
-  width: 90%;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  margin-left: 5%;
-  background-color: #666666;
-  overflow: hidden;
-  border-radius: 4px;
-  transition: all 0.2s ease 0s;
-}
-
-/*.cardPlaylist:hover {
   background-color: #999999;
   box-shadow: 15px 10px 25px 0 rgba(0,0,0,0.2);
 }*/
@@ -349,11 +359,7 @@ input[type=text]{
   margin-top: 5px;
   margin-right: 5px;
   margin-bottom: 5px;
-  border-radius: 3px;
-  width: 20px;
-  height: 20px;
   border: 0;
-  box-shadow: 2px 2px 5px;
   text-align: center;
   float: right;
   transition: all 0.2s ease 0s;
@@ -373,7 +379,7 @@ input[type=text]{
 }
 
 .playButt {
-  font-family: 'Catamaran', 'Kanit';
+  font-family: 'Athiti', 'Oxygen';
   font-size: 20px;
   width: 90%;
   height: 30px;
@@ -391,31 +397,39 @@ input[type=text]{
 }
 
 .addButt {
-  font-family: 'Catamaran', 'Kanit';
-  width: 150px;
-  height: 30px;
-  border-radius: 3px;
+  font-family: 'Athiti', 'Oxygen';
+  font-size: 25px;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   margin-right: 50px;
-  background-color: #0086b3;
+  background-color: #58D3F7;
   float: right;
   border: 0;
+  margin-top: 4%;
+  margin-left: 10%;
   transition: all 0.2s ease 0s;
   box-shadow: 2px 2px 5px;
 }
 
 .addButt:hover {
-    background-color: #00ace6;
+    background-color: #01A9DB;
+}
+
+.addButt:active {
+  background-color: #01A9DB;
+  box-shadow: 0px 0px 0px;
 }
 
 .text {
   padding: 20px 35px;
-  font-family: 'Catamaran', 'Kanit';
+  font-family: 'Athiti', 'Oxygen';
   font-size: 18px;
-  color: white;
 }
 
 ::-webkit-scrollbar {
-  width: 2px;
+  width: 5px;
   height: 2px;
 }
 ::-webkit-scrollbar-button {
@@ -423,26 +437,26 @@ input[type=text]{
   height: 0px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #e1e1e1;
+  background: #6E6E6E;
   border: 0px none #ffffff;
   border-radius: 50px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #ffffff;
+  background: #6E6E6E;
 }
 ::-webkit-scrollbar-thumb:active {
-  background: #000000;
+  background: #F2F2F2;
 }
 ::-webkit-scrollbar-track {
-  background: #666666;
-  border: 0px none #ffffff;
+  background: #F2F2F2;
+  border: 0px none #F2F2F2;
   border-radius: 50px;
 }
 ::-webkit-scrollbar-track:hover {
-  background: #666666;
+  background: #F2F2F2;
 }
 ::-webkit-scrollbar-track:active {
-  background: #333333;
+  background: #F2F2F2;
 }
 ::-webkit-scrollbar-corner {
   background: transparent;

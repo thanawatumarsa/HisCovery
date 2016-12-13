@@ -2,14 +2,14 @@
   <div class="playList">
   <div id="textmenu">
     Your Playlist
-  </div>
+  </div><hr>
   <div class="play" v-if="playlist.length === 0">
     <div class="text">
       Your playist is empty
     </div>
   </div>
   <div v-for="play in playlist">
-    <lists-play-list :playlist = "playlist" :deleteplaylist = 'deleteplaylist' :index ="$index" :showpl = "showpl" :showplaylist = "showplaylist"></lists-play-list>
+    <lists-play-list :playlist = "playlist" :deleteplaylist = 'deleteplaylist' :index ="$index" :select = "select"></lists-play-list>
   </div>
 </div>
 </template>
