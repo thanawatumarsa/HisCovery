@@ -270,7 +270,7 @@ input[type=text]{
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
 .cardPlaylist {
-  width: 100%;
+  width: 98%;
   margin-top: 5px;
   margin-bottom: 5px;
   background-color: #ffffff;
@@ -299,6 +299,14 @@ input[type=text]{
   animation-delay: 0.1s;
 }
 
+.color1 {
+  border: 2px solid #BFFF00;
+}
+
+.color2 {
+  border: 1.2px solid #E6E6E6;
+}
+
 .play {
   width: 100%;
   text-align: center;
@@ -313,7 +321,7 @@ input[type=text]{
   float: left;
   padding-bottom: -6px;
   width: 30%;
-  height: 13.4vh auto;
+  height: 100%;
   margin-top: 15px;
   margin-left: 15px;
   margin-right: 5px;
@@ -338,7 +346,6 @@ input[type=text]{
   margin-top: 15px;
   margin-right: 5px;
   margin-bottom: 15px;
-  float: right;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: '...?';
