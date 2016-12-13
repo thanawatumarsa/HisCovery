@@ -300,7 +300,7 @@ input[type=text]{
 }
 
 .color1 {
-  border: 2px solid #BFFF00;
+  border: 2px solid #58D3F7;
 }
 
 .color2 {
