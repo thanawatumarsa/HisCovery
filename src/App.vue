@@ -8,13 +8,10 @@
     </div>
   </div>
   <div class="columns is-desktop">
-    <div class="column is-2 is-offset-1">
-      <menu :cate-search = "cateSearch"></menu>
-    </div>
     <div class="column is-6 is-offset-0">
       <content :toggleshow = "toggleShow" :show = "show" :showplay = "showPlay" :list = "list" :select = "select" :video = "VideoId" :end = "end" :pl = "addPlayList" :showplaylist = "showPlaylist" :showpl = "showpl" :end = "end"></content>
     </div>
-    <div class="column is-2 is-offset-0">
+    <div class="column is-6 is-offset-0">
       <play-list :toggleshowplay = "toggleShowPlay" :select = "select" :toggleshow = "toggleShow" :playlist = "playLists" :deleteplaylist = "deletePlayList"></play-list>
     </div>
   </div>
@@ -28,6 +25,7 @@ import ToolBar from './components/ToolBar'
 import Content from './components/Content'
 import Menu from './components/Menu'
 import PlayList from './components/PlayList'
+
 export default {
   data () {
     return {
@@ -120,9 +118,11 @@ export default {
     }
   }
 }
+
 </script>
 
 <style lang="css">
+
 body {
   padding: 0px;
   margin: 0px;
@@ -131,6 +131,7 @@ body {
   font-family: 'Athiti', 'Oxygen';
   background-color: #F1F1F1;
 }
+
 .top {
   padding: 0;
   margin: 0px;
@@ -140,17 +141,21 @@ body {
   background-color: #282828;
   font-family: 'Athiti', 'Oxygen';
 }
+
 #header {
   padding: 12px 10%;
   font-family: 'Athiti', 'Oxygen';
 }
+
 #main div {
    flex: 1;
 }
+
 #textmenu {
   padding: 20px 35px;
   font-size: 25px;
 }
+
 #boxmenu {
   width: 100%;
   height: 100%;
@@ -158,20 +163,24 @@ body {
   padding-bottom: 20px;
   border-radius: 3px;
 }
+
 /*@media screen and (max-width: 980px) {
     #boxmenu {
         visibility: hidden;
     }
 }*/
+
 #menu {
   width: 100%;
   margin-top: 10px;
 }
+
 #video {
   margin-bottom: 30px;
   width: 100%;
   text-align: center;
 }
+
 .playList {
   width: 100%;
   height: 100%;
@@ -182,6 +191,7 @@ body {
   background-color: #F2F2F2;
   border-radius: 3px;
 }
+
 .content {
   background-color: #F2F2F2;
   margin-top: 10px;
@@ -189,6 +199,7 @@ body {
   overflow: hidden;
   border-radius: 3px;
 }
+
 #playlists {
   margin-top: 10px;
   height: 83.5vh;
@@ -197,6 +208,7 @@ body {
   align-items: center;
   padding-right:0px;
 }
+
 input[type=text]{
   padding: 6px 12px;
   border-radius:0px;
@@ -204,9 +216,11 @@ input[type=text]{
   width: 200px;
   font-family: 'Athiti', 'Oxygen';
 }
+
 .searchInput {
   border-radius: 25px;
 }
+
 .button {
   background-color: #F2F2F2;
   padding: 0px 30px;
@@ -219,15 +233,18 @@ input[type=text]{
   transition: all 0.2s ease 0s;
   font-family: 'Athiti', 'Oxygen';
 }
+
 .button:hover {
     background-color: #404040;
 }
+
 .video-container {
   position: relative;
   padding-bottom: 56.25%;
   padding-top: 25px;
   margin-bottom: 43px;
 }
+
 .video-container iframe {
 	position:absolute;
   margin-left: -5%;
@@ -236,6 +253,7 @@ input[type=text]{
 	width:100%;
 	height:100%;
 }
+
 .card {
   width: 99.5%;
   margin-top: 5px;
@@ -245,9 +263,11 @@ input[type=text]{
   transition: all 0.2s ease 0s;
   border: 1.2px solid #E6E6E6;
 }
+
 @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
 .cardPlaylist {
   width: 98%;
   margin-top: 5px;
@@ -255,37 +275,46 @@ input[type=text]{
   overflow: hidden;
   border: 1.2px solid #E6E6E6;
 }
+
 .fade-in {
   opacity:0;  /* make things invisible upon start */
 	-webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
 	-moz-animation:fadeIn ease-in 1;
 	animation:fadeIn ease-in 1;
+
 	-webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
 	-moz-animation-fill-mode:forwards;
 	animation-fill-mode:forwards;
+
 	-webkit-animation-duration:0.3s;
 	-moz-animation-duration:0.3s;
 	animation-duration:0.3s;
 }
+
 .fade-in.one {
   -webkit-animation-delay: 0.1s;
   -moz-animation-delay: 0.1s;
   animation-delay: 0.1s;
 }
+
 .color1 {
   border: 2px solid #58D3F7;
 }
+
 .color2 {
   border: 1.2px solid #E6E6E6;
 }
+
 .play {
   width: 100%;
   text-align: center;
 }
+
 /*.card:hover {
   background-color: #999999;
   box-shadow: 15px 10px 25px 0 rgba(0,0,0,0.2);
 }*/
+
 .imgLink {
   float: left;
   padding-bottom: -6px;
@@ -296,6 +325,7 @@ input[type=text]{
   margin-right: 5px;
   margin-bottom: 15px;
 }
+
 .imgPL {
   float: left;
   padding-bottom: -6px;
@@ -306,6 +336,7 @@ input[type=text]{
   margin-right: 5px;
   margin-bottom: 15px;
 }
+
 .nameLink {
   width: 60%;
   max-height: 30px;
@@ -317,6 +348,7 @@ input[type=text]{
   overflow: hidden;
   text-overflow: '...?';
 }
+
 .namePL {
   width: 50%;
   height: 50px;
@@ -327,6 +359,7 @@ input[type=text]{
   overflow: hidden;
   text-overflow: '...?';
 }
+
 .del {
   margin-top: 5px;
   margin-right: 5px;
@@ -336,16 +369,21 @@ input[type=text]{
   text-align: center;
   float: right;
   position: relative;
+
   transition: all 0.2s ease 0s;
 }
+
 .del:hover {
   background-color: #ff4d4d;
 }
+
 .addPlaylist {
   width: 60%;
   height: 50px;
+
   float: right;
 }
+
 .playButt {
   font-family: 'Athiti', 'Oxygen';
   font-size: 20px;
@@ -359,9 +397,11 @@ input[type=text]{
   margin-top: 10px;
   margin-bottom: 20px;
 }
+
 .playButt:hover {
     background-color: #00ace6;
 }
+
 .addButt {
   font-family: 'Athiti', 'Oxygen';
   font-size: 25px;
@@ -379,18 +419,22 @@ input[type=text]{
   transition: all 0.2s ease 0s;
   box-shadow: 2px 2px 5px;
 }
+
 .addButt:hover {
     background-color: #01A9DB;
 }
+
 .addButt:active {
   background-color: #01A9DB;
   box-shadow: 0px 0px 0px;
 }
+
 .text {
   padding: 20px 35px;
   font-family: 'Athiti', 'Oxygen';
   font-size: 18px;
 }
+
 ::-webkit-scrollbar {
   width: 5px;
   height: 2px;
@@ -424,4 +468,5 @@ input[type=text]{
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
+
 </style>
