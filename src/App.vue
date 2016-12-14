@@ -142,11 +142,12 @@ body {
   height: 50px;
   color: white;
   background-color: #282828;
-  text-align: left;
+  font-family: 'Athiti', 'Oxygen';
 }
 
 #header {
   padding: 12px 10%;
+  font-family: 'Athiti', 'Oxygen';
 }
 
 #main div {
@@ -213,9 +214,10 @@ body {
 
 input[type=text]{
   padding: 6px 12px;
-  border-radius:10px;
+  border-radius:0px;
   height: 10px;
   width: 200px;
+  font-family: 'Athiti', 'Oxygen';
 }
 
 .searchInput {
@@ -272,7 +274,6 @@ input[type=text]{
 .cardPlaylist {
   width: 98%;
   margin-top: 5px;
-  margin-bottom: 5px;
   background-color: #ffffff;
   overflow: hidden;
   border: 1.2px solid #E6E6E6;
@@ -407,6 +408,7 @@ input[type=text]{
 .addButt {
   font-family: 'Athiti', 'Oxygen';
   font-size: 25px;
+  display: inline-block;
   color: white;
   width: 40px;
   height: 40px;
